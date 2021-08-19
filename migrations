@@ -1,0 +1,21 @@
+CREATE TABLE public.prices (
+	id serial NOT NULL,
+	price_for_app int NOT NULL,
+	price_for_app_by_country jsonb NULL,
+	CONSTRAINT prices_pk PRIMARY KEY (id)
+);
+
+CREATE TABLE public.bundles (
+	id serial NOT NULL,
+	app_name varchar NOT NULL,
+	app_url varchar NOT NULL,
+	price_id int NULL,
+	CONSTRAINT bundles_pk PRIMARY KEY (id),
+	CONSTRAINT bundles_fk FOREIGN KEY (price_id) REFERENCES public.prices(id)
+);
+
+CREATE TABLE public.default_price (
+	id serial NOT NULL,
+	default_price int NOT NULL,
+	CONSTRAINT default_price_pk PRIMARY KEY (id)
+);

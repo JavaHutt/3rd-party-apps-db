@@ -1,0 +1,23 @@
+version: '3.6'
+services:
+  postgres:
+    container_name: squid_3rd_party_apps_prices
+    environment:
+      POSTGRES_DB: 3rd_party_apps_prices
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 7777:8080
+volumes:
+  pgdata:
+    external: true
+    name:
+      3rd_party_apps_prices
