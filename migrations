@@ -2,6 +2,8 @@ CREATE TABLE IF NOT EXISTS public.prices (
 	id serial NOT NULL,
 	price_for_app int NOT NULL,
 	price_for_app_by_country jsonb NULL,
+	created_at timestamp default current_timestamp,
+	updated_at timestamp default current_timestamp,
 	CONSTRAINT prices_pk PRIMARY KEY (id)
 );
 
@@ -10,13 +12,17 @@ CREATE TABLE IF NOT EXISTS public.bundles (
 	app_name varchar NOT NULL,
 	app_url varchar NOT NULL,
 	price_id int NULL,
+	created_at timestamp default current_timestamp,
+	updated_at timestamp default current_timestamp,
 	CONSTRAINT bundles_pk PRIMARY KEY (id),
 	CONSTRAINT bundles_un UNIQUE (app_name),
-	CONSTRAINT bundles_fk FOREIGN KEY (price_id) REFERENCES public.prices(id)
+	CONSTRAINT bundles_fk FOREIGN KEY (price_id) REFERENCES public.prices(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.default_price (
 	id serial NOT NULL,
 	default_price int NOT NULL,
+	created_at timestamp default current_timestamp,
+	updated_at timestamp default current_timestamp,
 	CONSTRAINT default_price_pk PRIMARY KEY (id)
 );
