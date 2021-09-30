@@ -3,6 +3,6 @@ up	:
 down	:
 	docker-compose -f docker-compose.yml down
 volume	:
-	docker volume create --name=3rd_party_apps_prices
+	docker volume create --name=app_service
 seed	:
-	http -a login:password POST http://localhost:8004/third-party-apps/db/seed < seed.json
+	http -a root:VjqYjvth2cjhjrGznm POST http://localhost:8004/third-party-apps/db/seed < seed.json
